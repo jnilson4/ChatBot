@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>490</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>chat.model :: ChatBot
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>290</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>chat.controller :: ChatController
+--
+- stupidBot : Chatbot
+- display : ChatbotViewer
+--
++ start() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>290</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>chat.controller :: ChatRunner
+--
+
+--
++ main(String[]) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>490</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>chat.view :: ChatbotViewer
+--
+
+--
++ displayMessage(String) : void
++ collectResponse(String) : String
++ collectOption(String) : int</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
