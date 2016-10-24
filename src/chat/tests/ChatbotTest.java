@@ -18,7 +18,7 @@ public class ChatbotTest
 	private String userName;
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp() throws Exception 
 	{
 		userName = "test";
 		sampleBot = new Chatbot(userName);
