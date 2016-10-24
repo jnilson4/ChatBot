@@ -31,11 +31,47 @@ public class Chatbot
 
 	private void buildMemesList()
 	{
-		
+		memesList.add("John Cena");
+		memesList.add("doge");
+		memesList.add("cute animals");
+		memesList.add("grumpy cat");
+		memesList.add("dat boi");
+		memesList.add("willy wonka");
+		memesList.add("harmabe");
+		memesList.add("fails");
+		memesList.add("Donald Trump Hair");
+		memesList.add("funny fails");
+		memesList.add("pajama pictures");
+		memesList.add("thug life");
+		memesList.add("one doesn't simply");
+		memesList.add("you had one job");
+		memesList.add("aint nobody got time for dat");
+		memesList.add("tell me more");
+		memesList.add("does it wrong");
+		memesList.add("steve harvey");
 	}
 
 	private void buildPoliticalTopicsList()
 	{
+		politicalTopicList.add("election");
+		politicalTopicList.add("Democrat");
+		politicalTopicList.add("Republican");
+		politicalTopicList.add("liberal");
+		politicalTopicList.add("conservative");
+		politicalTopicList.add("Clinton");
+		politicalTopicList.add("Trump");
+		politicalTopicList.add("Kaine");
+		politicalTopicList.add("Pence");
+		politicalTopicList.add("11/8/2016");
+		politicalTopicList.add("Stein");
+		politicalTopicList.add("Johnson");
+		politicalTopicList.add("November");
+		politicalTopicList.add("states");
+		politicalTopicList.add("White House");
+		politicalTopicList.add("United States of America");
+		politicalTopicList.add("President");
+		politicalTopicList.add("Washington D.C.");
+		politicalTopicList.add("presidential race");
 		
 	}
 
@@ -66,14 +102,14 @@ public class Chatbot
 	 */
 	public boolean contentChecker(String currentInput)
 	{
-		boolean hasInput = false;
+		boolean hasContent = false;
 		
-		if(currentInput != null && currentInput.contains("chicken"))
+		if(currentInput.contains(content))
 		{
-			hasInput = true;
+			hasContent = true;
 		}
 		
-		return hasInput;
+		return hasContent;
 	}
 
 	/**
