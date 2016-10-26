@@ -16,11 +16,32 @@ public class ChatController
 	
 	public void start()
 	{
-		String response = "talking to you";
+		String response = chatView.collectResponse("What do you want to talk about today???");
 		
 		while(stupidBot.lengthChecker(response))
 		{
-			response = chatView.collectResponse("What to talk about today?????");
+			chatView.displayMessage(useChatbotCheckers(response));
+			response = chatView.collectResponse("Oh, you are interested in " + response);
 		}
+	}
+	
+	private String useChatbotCheckers(String input)
+	{
+		String answer = "";
+		
+		if(stupidBot.contentChecker(input))
+		{
+			answer += "\nYou know my special secret\n";
+		}
+		if(stupidBot.memeChecker(input))
+		{
+			answer += "\nI can has memes?\n";
+		}
+		if(answer.length() == 0)
+		{
+			answer += "Sorry, I don't know about " + input;
+		}
+		
+		return answer;
 	}
 }
