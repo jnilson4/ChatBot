@@ -56,7 +56,7 @@ public class Chatbot
 	{
 		politicalTopicList.add("election");
 		politicalTopicList.add("2017");
-		politicalTopicList.add("President-Elect");
+		politicalTopicList.add("Hillary");
 		politicalTopicList.add("liberal");
 		politicalTopicList.add("conservative");
 		politicalTopicList.add("Democrat");
@@ -128,6 +128,13 @@ public class Chatbot
 	{
 		boolean topicChecker = false;
 		
+		for(int index = 0; index < politicalTopicList.size(); index++)
+		{
+			if(currentInput.equals(politicalTopicList.get(index)))
+			{
+				topicChecker = true;
+			}
+		}
 		return topicChecker;
 	}
 
@@ -143,9 +150,9 @@ public class Chatbot
 	{
 		boolean hasMemes = false;
 		
-		for(int index = 0; index < 18; index++)
+		for(int index = 0; index < memesList.size(); index++)
 		{
-			if(currentInput.equals(memesList))
+			if(currentInput.equalsIgnoreCase(memesList.get(index)))
 			{
 				hasMemes = true;
 			}
