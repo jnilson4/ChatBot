@@ -31,13 +31,13 @@ public class Chatbot
 
 	private void buildMemesList()
 	{
-		memesList.add("John Cena");
+		memesList.add("john cena");
 		memesList.add("doge");
 		memesList.add("cute animals");
 		memesList.add("grumpy cat");
 		memesList.add("dat boi");
 		memesList.add("willy wonka");
-		memesList.add("harmabe");
+		memesList.add("harambe");
 		memesList.add("fails");
 		memesList.add("Donald Trump Hair");
 		memesList.add("funny fails");
@@ -49,20 +49,23 @@ public class Chatbot
 		memesList.add("tell me more");
 		memesList.add("does it wrong");
 		memesList.add("steve harvey");
+		memesList.add("cute animals");
 	}
 
 	private void buildPoliticalTopicsList()
 	{
 		politicalTopicList.add("election");
-		politicalTopicList.add("Democrat");
-		politicalTopicList.add("Republican");
+		politicalTopicList.add("2017");
+		politicalTopicList.add("President-Elect");
 		politicalTopicList.add("liberal");
 		politicalTopicList.add("conservative");
+		politicalTopicList.add("Democrat");
+		politicalTopicList.add("Republican");
 		politicalTopicList.add("Clinton");
 		politicalTopicList.add("Trump");
 		politicalTopicList.add("Kaine");
 		politicalTopicList.add("Pence");
-		politicalTopicList.add("11/8/2016");
+		politicalTopicList.add("11/8/16");
 		politicalTopicList.add("Stein");
 		politicalTopicList.add("Johnson");
 		politicalTopicList.add("November");
@@ -138,7 +141,17 @@ public class Chatbot
 	 */
 	public boolean memeChecker(String currentInput)
 	{
-		return false;
+		boolean hasMemes = false;
+		
+		for(int index = 0; index < 18; index++)
+		{
+			if(currentInput.equals(memesList))
+			{
+				hasMemes = true;
+			}
+		}
+		
+		return hasMemes;
 	}
 
 	/**
