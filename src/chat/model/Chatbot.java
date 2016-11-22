@@ -77,6 +77,11 @@ public class Chatbot
 		politicalTopicList.add("presidential race");
 		
 	}
+	
+	public void quitChecker()
+	{
+		
+	}
 
 	/**
 	 * * Checks the length of the supplied string. Returns false if the supplied
@@ -205,5 +210,9 @@ public class Chatbot
 	{
 		this.content = content;
 	}
-
+	
+	public void randomTopicGenerator()
+	{
+		
+	}
 }
