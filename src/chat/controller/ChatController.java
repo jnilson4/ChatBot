@@ -32,8 +32,8 @@ public class ChatController
 	{
 		String answer = "";
 		
-		if (!stupidBot.quitChecker(input))
-		{
+		//if (!stupidBot.quitChecker(input))
+		//{
 			if(stupidBot.contentChecker(input))
 			{
 				answer += "\nYou know my special secret\n";
@@ -54,12 +54,12 @@ public class ChatController
 			{
 				//answer += randomTopicGenerator();
 			}
-		}
-		else 
-		{
-			chatView.displayMessage("Thanks you for chatting with me :D");
-			System.exit(0);
-		}
+		//}
+		//else 
+		//{
+			//chatView.displayMessage("Thanks you for chatting with me :D");
+			//System.exit(0);
+		//}
 		return answer;
 	}
 }
