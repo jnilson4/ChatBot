@@ -29,6 +29,9 @@ public class Chatbot
 		this.buildPoliticalTopicsList();
 	}
 
+	/**
+	 * Meme's list for the checker.
+	 */
 	private void buildMemesList()
 	{
 		memesList.add("john cena");
@@ -52,6 +55,9 @@ public class Chatbot
 		memesList.add("cute animals");
 	}
 
+	/**
+	 * Political topic list for the checker.
+	 */
 	private void buildPoliticalTopicsList()
 	{
 		politicalTopicList.add("election");
@@ -75,11 +81,6 @@ public class Chatbot
 		politicalTopicList.add("President");
 		politicalTopicList.add("Washington D.C.");
 		politicalTopicList.add("presidential race");
-		
-	}
-	
-	private void buildContent()
-	{
 		
 	}
 	
@@ -252,6 +253,11 @@ public class Chatbot
 		return assertQuit;
 	}
 	
+	/**
+	 * Checks to see if the keyboard was mashed.
+	 * @param currentInput
+	 * @return
+	 */
 	public boolean keyboardMashChecker(String currentInput)
 	{
 		boolean keyboardMash = false;
@@ -263,7 +269,6 @@ public class Chatbot
 		
 		return keyboardMash;
 	}
-	
 	
 	/**
 	 * * Returns the username of this Chatbot instance. * @return The username
@@ -308,10 +313,5 @@ public class Chatbot
 	public void setContent(String content)
 	{
 		this.content = content;
-	}
-	
-	public void randomTopicGenerator()
-	{
-		
 	}
 }

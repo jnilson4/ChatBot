@@ -62,4 +62,50 @@ public class ChatController
 		}
 		return answer;
 	}
+	
+	public Chatbot getChatbot()
+	{
+		return stupidBot;
+	}
+	
+	public ChatFrame getBaseFrame()
+	{
+		return baseFrame;
+	}
+	
+	public String randomTopicGenerator()
+	{
+		String randomTopic = "";
+		int random = (int) (Math.random() * 7);
+		
+		switch (random)
+		{
+		case 0:
+			randomTopic = "Did you hear about the daft punk beastie boys mix?";
+			break;
+		case 1:
+			randomTopic = "Can you bring me some Sriracha?";
+			break;
+		case 2:
+			randomTopic = "Time for some industrial!";
+			break;
+		case 3:
+			randomTopic = "Reading novels is fantastic!";
+			break;
+		case 4:
+			randomTopic = "Computational and algorithmic thinking for the win!";
+			break;
+		case 5:
+			randomTopic = "I love java";
+			break;
+		case 6:
+			randomTopic = "Time to code!";
+			break;
+		case 7: 
+			randomTopic = "Tennis is awesome!";
+			break;
+		}
+		
+		return randomTopic;
+	}
 }
