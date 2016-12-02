@@ -26,7 +26,7 @@ public class Chatbot
 		this.userName = userName;
 		this.content = new String("Chinese food");
 		this.buildMemesList();
-		buildPoliticalTopicsList();
+		this.buildPoliticalTopicsList();
 	}
 
 	private void buildMemesList()
@@ -78,11 +78,11 @@ public class Chatbot
 		
 	}
 	
-	public void quitChecker()
+	private void buildContent()
 	{
 		
 	}
-
+	
 	/**
 	 * * Checks the length of the supplied string. Returns false if the supplied
 	 * String is empty or null, otherwise returns true. * @param currentInput * @return
@@ -166,6 +166,105 @@ public class Chatbot
 		return hasMemes;
 	}
 
+	/**
+	 * Checks to see if the currentInput has html information or tags.
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean inputHTMLChecker(String currentInput)
+	{
+		boolean htmlPresent = false; 
+		
+		if(currentInput.contains("<P>"))
+		{
+			htmlPresent = true;
+		}
+		else if(currentInput.contains("<A HREF=\""))
+		{
+			int index = currentInput.indexOf("<A HREF=\"") + 9;
+			String sub = currentInput.substring(index);
+			
+			if(sub.contains("\">"))
+			{
+				int index2 = sub.indexOf("\">");
+				String sub2 = sub.substring(index2);
+				
+				if(sub2.contains(" </a>"))
+				{
+					htmlPresent = true;
+				}
+			}
+		}
+		else if(currentInput.contains("<"))
+		{
+			String lower = currentInput.toLowerCase();
+			int openIndex1 = lower.indexOf("<") + 1;
+			String tag = "";
+			if(lower.contains(">"))
+			{
+				int openIndex2 = lower.indexOf(">");
+				tag = lower.substring(openIndex1, openIndex2);
+				
+				String sub = lower.substring(openIndex2 + 1);
+				
+				if(sub.contains("</" + tag + ">"))
+				{
+					htmlPresent = true;
+				}
+			}
+		}
+		return htmlPresent;
+	}
+	
+	/**
+	 * Checks to see if twitter tags or usernames are in the users input.
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean twitterChecker(String currentInput)
+	{
+		boolean twitterCheckerOn = false;
+		String sample = currentInput.replaceAll(" ", " ");
+		if(sample.length() > 1&& !currentInput.startsWith(" "))
+		{
+			twitterCheckerOn = true;
+		}
+		return twitterCheckerOn;
+	}
+	
+	/**
+	 * Checks to see if the program is being quit or exited.
+	 * @param currentInput
+	 * @return
+	 */
+	public boolean quitChecker(String currentInput)
+	{
+		boolean assertQuit = false;
+		
+		if(currentInput.equalsIgnoreCase("quit"))
+		{
+			assertQuit = true;
+		} else if (currentInput.equalsIgnoreCase("exit"))
+		{
+			assertQuit = false;
+		}
+		
+		return assertQuit;
+	}
+	
+	public boolean keyboardMashChecker(String currentInput)
+	{
+		boolean keyboardMash = false;
+		
+		if (currentInput.equalsIgnoreCase("sdf") || currentInput.equalsIgnoreCase("dfg") || currentInput.equalsIgnoreCase("cvb") || currentInput.equalsIgnoreCase(",./"))
+		{
+			keyboardMash = true;
+		}
+		
+		return keyboardMash;
+	}
+	
+	
 	/**
 	 * * Returns the username of this Chatbot instance. * @return The username
 	 * of the Chatbot.
