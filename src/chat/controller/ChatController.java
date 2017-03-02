@@ -1,5 +1,7 @@
 package chat.controller;
 
+import javax.swing.JOptionPane;
+
 import chat.model.Chatbot;
 import chat.view.ChatViewer;
 import chat.view.ChatFrame;						
@@ -7,19 +9,17 @@ import chat.view.ChatFrame;
 public class ChatController
 {
 	private Chatbot stupidBot;
-	private ChatViewer chatView;
 	private ChatFrame baseFrame;
 	
 	public ChatController()
 	{
 		stupidBot = new Chatbot("Boaty McBoatFace");
-		chatView = new ChatViewer();
 		baseFrame = new ChatFrame(this);
 	}
 	
 	public void start()
 	{
-		String response = chatView.collectResponse("What do you want to talk about today???");
+		JOptionPane.showMessageDialog(baseFrame, "Welcome to Chatbot!");
 	}
 	
 	public String useChatbotCheckers(String input)
@@ -30,37 +30,42 @@ public class ChatController
 		{
 			if(stupidBot.contentChecker(input))
 			{
-				answer += "\nYou know my special secret\n";
+				answer += "You know my special secret";
 			}
 			
 			if(stupidBot.memeChecker(input))
 			{
-				answer += "\nI can has memes?\n";
+				answer += "I can has memes?";
 			}
 			
-			if(stupidBot.lengthChecker(input))
-			{
-				answer += "Sorry, I don't know about " + input;
-			}
+//			if(stupidBot.lengthChecker(input))
+//			{
+//				answer += "Sorry, I don't know about " + input;
+//			}
 			
 			if(stupidBot.politicalTopicChecker(input))
 			{
-				answer += "\nYou like politics huh?\n";
+				answer += "You like politics huh?";
 			}
 			
 			if(stupidBot.inputHTMLChecker(input))
 			{
-				answer += "\nI don't know how to talk about HTML.\n";
+				answer += "I don't know how to talk about HTML.";
 			}
 			
-			if(stupidBot.twitterChecker(input))
-			{
-				answer += "\nTWITTER, CHEEP CHEEP\n";
-			}
+//			if(stupidBot.twitterChecker(input))
+//			{
+//				answer += "\nTWITTER, CHEEP CHEEP\n";
+//			}
 			
 			if(stupidBot.keyboardMashChecker(input))
 			{
-				answer += "\nMASH MASH MASH\n";
+				answer += "MASH MASH MASH";
+			}
+			
+			if(stupidBot.helloChecker(input))
+			{
+				answer+= "Hi!!";
 			}
 			
 			int canBeRandom = (int) (Math.random() * 7);
@@ -73,7 +78,6 @@ public class ChatController
 		}
 		else 
 		{
-			chatView.displayMessage("Thank you for chatting with me :D");
 			System.exit(0);
 		}
 		return answer;
