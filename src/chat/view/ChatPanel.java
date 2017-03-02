@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class ChatPanel extends JPanel
 {
@@ -122,13 +124,15 @@ public class ChatPanel extends JPanel
 		chatButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click){
-				String userWords = chatField.getText();
-				String botResponse = baseController.useChatbotCheckers(userWords);
-				String currentText = chatDisplay.getText();
-				
-				chatDisplay.setText("You said: " + userWords + "\n" + "Chatbot said: " + botResponse + "\n" + currentText);
-				chatDisplay.setCaretPosition(chatDisplay.getCaretPosition());
-				chatField.setText("");
+				processText();
+			}
+		});
+		
+		chatField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent enterPress)
+			{
+				processText();
 			}
 		});
 		
@@ -167,5 +171,16 @@ public class ChatPanel extends JPanel
 				
 			}
 		});
+	}
+
+	private void processText()
+	{
+		String userWords = chatField.getText();
+		String botResponse = baseController.useChatbotCheckers(userWords);
+		String currentText = chatDisplay.getText();
+		
+		chatDisplay.setText("You said: " + userWords + "\n" + "Chatbot said: " + botResponse + "\n" + currentText);
+		chatDisplay.setCaretPosition(0);
+		chatField.setText("");
 	}
 }
