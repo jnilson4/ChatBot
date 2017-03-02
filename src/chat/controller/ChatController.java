@@ -9,17 +9,19 @@ import chat.view.ChatFrame;
 public class ChatController
 {
 	private Chatbot stupidBot;
+	private ChatViewer chatView;
 	private ChatFrame baseFrame;
 	
 	public ChatController()
 	{
 		stupidBot = new Chatbot("Boaty McBoatFace");
 		baseFrame = new ChatFrame(this);
+		chatView = new ChatViewer();
 	}
 	
 	public void start()
 	{
-		JOptionPane.showMessageDialog(baseFrame, "Welcome to Chatbot!");
+		chatView.displayMessage("Welcome to Chatbot!");
 	}
 	
 	public String useChatbotCheckers(String input)
@@ -121,11 +123,22 @@ public class ChatController
 		case 6:
 			randomTopic = "Time to code!";
 			break;
-		case 7: 
-			randomTopic = "Tennis is awesome!";
+		default: 
+			randomTopic = "This can't be happening!";
 			break;
 		}
 		
 		return randomTopic;
+	}
+	
+	public void handleErrors(Exception currentException)
+	{
+		chatView.displayMessage("An error has occured. Details provided next.");
+		chatView.displayMessage(currentException.getMessage());
+	}
+	
+	public ChatViewer getPopup()
+	{
+		return chatView;
 	}
 }
