@@ -38,9 +38,29 @@ public class ChatController
 				answer += "\nI can has memes?\n";
 			}
 			
-			if(stupidBot.lengthChecker(answer))
+			if(stupidBot.lengthChecker(input))
 			{
 				answer += "Sorry, I don't know about " + input;
+			}
+			
+			if(stupidBot.politicalTopicChecker(input))
+			{
+				answer += "\nYou like politics huh?\n";
+			}
+			
+			if(stupidBot.inputHTMLChecker(input))
+			{
+				answer += "\nI don't know how to talk about HTML.\n";
+			}
+			
+			if(stupidBot.twitterChecker(input))
+			{
+				answer += "\nTWITTER, CHEEP CHEEP\n";
+			}
+			
+			if(stupidBot.keyboardMashChecker(input))
+			{
+				answer += "\nMASH MASH MASH\n";
 			}
 			
 			int canBeRandom = (int) (Math.random() * 7);
@@ -49,7 +69,7 @@ public class ChatController
 				answer += randomTopicGenerator();
 			}
 			
-			answer += "Wow";
+//			answer += "Wow";
 		}
 		else 
 		{
