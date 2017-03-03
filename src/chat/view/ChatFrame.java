@@ -25,7 +25,7 @@ public class ChatFrame extends JFrame
 		this.setContentPane(basePanel);
 		this.setTitle("Now with saving!");
 		this.setSize(new Dimension(500,325));
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);

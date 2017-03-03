@@ -168,7 +168,7 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				
+//				chatbotTwitter.updateStatus("I just");
 			}
 		});
 	}
