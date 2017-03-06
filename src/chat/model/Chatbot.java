@@ -125,7 +125,7 @@ public class Chatbot
 	{
 		boolean hasHello = false;
 		
-		if(currentInput.equalsIgnoreCase("Hello") || currentInput.equalsIgnoreCase("Hi"))
+		if(currentInput.equalsIgnoreCase("Hello") || currentInput.equalsIgnoreCase("Hi") || currentInput.equalsIgnoreCase("Hey"))
 		{
 			hasHello = true;
 		}

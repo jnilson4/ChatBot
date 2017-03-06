@@ -1,8 +1,7 @@
 package chat.controller;
 
 import javax.swing.JOptionPane;
-
-import chat.model.Chatbot;
+import chat.model.*;
 import chat.view.ChatViewer;
 import chat.view.ChatFrame;						
 
@@ -11,10 +10,12 @@ public class ChatController
 	private Chatbot stupidBot;
 	private ChatViewer chatView;
 	private ChatFrame baseFrame;
+	private CTECTwitter tweetBot;
 	
 	public ChatController()
 	{
 		stupidBot = new Chatbot("Boaty McBoatFace");
+		tweetBot = new CTECTwitter(this);
 		baseFrame = new ChatFrame(this);
 		chatView = new ChatViewer();
 	}
@@ -67,7 +68,7 @@ public class ChatController
 			
 			if(stupidBot.helloChecker(input))
 			{
-				answer+= "Hi!!";
+				answer+= "Hi!! How are you? ";
 			}
 			
 			int canBeRandom = (int) (Math.random() * 7);
@@ -83,16 +84,6 @@ public class ChatController
 			System.exit(0);
 		}
 		return answer;
-	}
-	
-	public Chatbot getChatbot()
-	{
-		return stupidBot;
-	}
-	
-	public ChatFrame getBaseFrame()
-	{
-		return baseFrame;
 	}
 	
 	public String randomTopicGenerator()
@@ -131,6 +122,16 @@ public class ChatController
 		return randomTopic;
 	}
 	
+	public Chatbot getChatbot()
+	{
+		return stupidBot;
+	}
+	
+	public ChatFrame getBaseFrame()
+	{
+		return baseFrame;
+	}
+	
 	public void handleErrors(Exception currentException)
 	{
 		chatView.displayMessage("An error has occured. Details provided next.");
@@ -140,5 +141,10 @@ public class ChatController
 	public ChatViewer getPopup()
 	{
 		return chatView;
+	}
+	
+	public void useTwitter(String text)
+	{
+		tweetBot.sendTweet(text);
 	}
 }

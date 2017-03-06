@@ -168,7 +168,8 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-//				chatbotTwitter.updateStatus("I just");
+				baseController.useTwitter(chatField.getText());
+				chatDisplay.append("\nYou just tweeted from Chatbot!!!\n");
 			}
 		});
 	}
