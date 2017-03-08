@@ -18,6 +18,7 @@ public class CTECTwitter
 	private ChatViewer chatView;
 	private List<Status> allTheTweets;
 	private List<String> tweetedWords;
+	
 	public CTECTwitter(ChatController baseController)
 	{
 		this.baseController = baseController;
@@ -32,9 +33,10 @@ public class CTECTwitter
 		String [] boringWords;
 		int wordCount = 0;
 		
-		Scanner boringWordScanner = new Scanner(this.getClass().getResourceAsStream("commondWords.txt"));
+		Scanner boringWordScanner = new Scanner(this.getClass().getResourceAsStream("commonWords.txt"));
 		while(boringWordScanner.hasNextLine())
 		{
+			boringWordScanner.nextLine();
 			wordCount++;
 		}
 		boringWordScanner.close();
@@ -54,10 +56,14 @@ public class CTECTwitter
 	
 	public String getMostCommonWord(String username)
 	{
+		gatherTheTweets(username);
+		turnTweetsToWords();
 		removeBoringWords();
 		removeBlankWords();
 		
-		return "";
+		String information = "The tweetcount is " + allTheTweets.size() + " and " + username + "'s " + calculateTopWord();
+		
+		return information;
 	}
 	
 	private void removeBoringWords()
@@ -74,6 +80,19 @@ public class CTECTwitter
 					index--;
 					boringIndex = boringWords.length;
 				}
+			}
+		}
+	}
+	
+	private void turnTweetsToWords()
+	{
+		for(Status currentTweet : allTheTweets)
+		{
+			String tweetText = currentTweet.getText();
+			String [] tweetWords = tweetText.split(" ");
+			for(String word : tweetWords)
+			{
+				tweetedWords.add(word);
 			}
 		}
 	}
@@ -127,4 +146,35 @@ public class CTECTwitter
 			baseController.handleErrors(otherError);
 		}
 	}
+
+ 	private String calculateTopWord()
+ 	{
+ 		String results = "";
+ 		String topWord = "";
+ 		int mostPopularIndex = 0;
+ 		int popularCount = 0;
+ 		
+ 		for(int index = 0; index < tweetedWords.size(); index++)
+ 		{
+ 			int currentPopularity = 0;
+ 			for(int searched = index + 1; searched < tweetedWords.size(); searched++)
+ 			{
+ 				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)))
+ 				{
+ 					currentPopularity++;
+ 				}
+ 			}
+ 			if(currentPopularity > popularCount)
+ 			{
+ 				popularCount = currentPopularity;
+ 				mostPopularIndex = index;
+ 				topWord = tweetedWords.get(mostPopularIndex);
+ 			}
+ 			currentPopularity = 0;
+ 		}
+ 		results += " the most popular word was " + topWord + ", and it occured " + popularCount + " times.";
+ 		results += "\nThat means it has a percentage of " + ((double) popularCount)/tweetedWords.size() * 100 + "%";
+ 		
+ 		return results;
+ 	}
 }
