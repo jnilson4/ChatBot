@@ -25,6 +25,26 @@ public class CTECTwitter
 		ignoredWords = new ArrayList<String>();
 		this.twitterBot = TwitterFactory.getSingleton();
 	}
+
+	private void createIgnoredWordList()
+	{
+		
+	}
+	
+	public String getMostCommonWord(String username)
+	{
+		return "";
+	}
+	
+	private void removeBoringWords()
+	{
+		
+	}
+	
+	private void removeBlankWords()
+	{
+		
+	}
 	
 	public void sendTweet(String textToTweet)
 	{
@@ -40,20 +60,5 @@ public class CTECTwitter
 		{
 			baseController.handleErrors(otherError);
 		}
-	}
-
-	private void createIgnoredWordList()
-	{
-		
-	}
-	
-	private void collectTweets(String username)
-	{
-		
-	}
-	
-	public String getMostCommonWord()
-	{
-		return null;
 	}
 }

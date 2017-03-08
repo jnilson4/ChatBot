@@ -160,7 +160,8 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent clicked)
 			{
-				
+				String username = chatField.getText();
+				chatDisplay.append(baseController.searchTwitter(username));
 			}
 		});
 		
