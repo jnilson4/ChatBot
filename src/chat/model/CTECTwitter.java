@@ -14,36 +14,58 @@ public class CTECTwitter
 	private ChatController baseController;
 	private Twitter twitterBot;
 	private ChatViewer chatView;
-	private List<Status> searchedTweets;
-	private List<String> ignoredWords;
-	
+	private List<Status> allTheTweets;
+	private List<String> tweetedWords;
 	public CTECTwitter(ChatController baseController)
 	{
 		this.baseController = baseController;
 		chatView = new ChatViewer();
-		searchedTweets = new ArrayList<Status>();
-		ignoredWords = new ArrayList<String>();
+		allTheTweets = new ArrayList<Status>();
+		tweetedWords = new ArrayList<String>();
 		this.twitterBot = TwitterFactory.getSingleton();
 	}
 
-	private void createIgnoredWordList()
+	private String [] createIgnoredWordList()
 	{
-		
+		return null;
 	}
 	
 	public String getMostCommonWord(String username)
 	{
+		removeBoringWords();
+		removeBlankWords();
+		
 		return "";
 	}
 	
 	private void removeBoringWords()
 	{
+		String [] boringWords = createIgnoredWordList();
 		
+		for(int index = 0; index < tweetedWords.size(); index++)
+		{
+			for(int boringIndex = 0; boringIndex < boringWords.length; boringIndex++)
+			{
+				if(tweetedWords.get(index).equalsIgnoreCase(boringWords[boringIndex]))
+				{
+					tweetedWords.remove(index);
+					index--;
+					boringIndex = boringWords.length;
+				}
+			}
+		}
 	}
 	
 	private void removeBlankWords()
 	{
-		
+		for(int index = 0; index < tweetedWords.size(); index++)
+		{
+			if(tweetedWords.get(index).trim().equals(""))
+			{
+				tweetedWords.remove(index);
+				index--;
+			}
+		}
 	}
 	
 	public void sendTweet(String textToTweet)
