@@ -9,6 +9,7 @@ import chat.view.ChatViewer;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import twitter4j.Paging;
 
 public class CTECTwitter
 {
@@ -89,7 +90,29 @@ public class CTECTwitter
 		}
 	}
 	
-	public void sendTweet(String textToTweet)
+	private void gatherTheTweets(String user)
+	{
+		tweetedWords.clear();
+		allTheTweets.clear();
+		int pageCount = 1;
+		
+		Paging statusPage = new Paging(1,200);
+		
+		while(pageCount <= 10)
+		{
+			try
+			{
+				allTheTweets.addAll(twitterBot.getUserTimeline(user, statusPage));
+			}
+			catch (TwitterException twitterError)
+			{
+				baseController.handleErrors(twitterError);
+			}
+			pageCount++;
+		}
+	}
+	
+ 	public void sendTweet(String textToTweet)
 	{
 		try
 		{
