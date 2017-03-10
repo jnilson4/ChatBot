@@ -8,8 +8,13 @@ import twitter4j.Status;
 import chat.view.ChatViewer;
 import java.util.List;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import twitter4j.GeoLocation;
 import twitter4j.Paging;
+import twitter4j.Query;
+import twitter4j.QueryResult;
 
 public class CTECTwitter
 {
@@ -90,9 +95,9 @@ public class CTECTwitter
 		{
 			String tweetText = currentTweet.getText();
 			String [] tweetWords = tweetText.split(" ");
-			for(String word : tweetWords)
+			for(int index = 0; index < tweetWords.length; index++)
 			{
-				tweetedWords.add(word);
+				tweetedWords.add(removePunctuation(tweetWords[index]));
 			}
 		}
 	}
@@ -113,9 +118,10 @@ public class CTECTwitter
 	{
 		tweetedWords.clear();
 		allTheTweets.clear();
+		
 		int pageCount = 1;
 		
-		Paging statusPage = new Paging(1,200);
+		Paging statusPage = new Paging(1,20);
 		
 		while(pageCount <= 10)
 		{
@@ -159,7 +165,7 @@ public class CTECTwitter
  			int currentPopularity = 0;
  			for(int searched = index + 1; searched < tweetedWords.size(); searched++)
  			{
- 				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)))
+ 				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)) && !tweetedWords.get(index).equals(topWord));
  				{
  					currentPopularity++;
  				}
@@ -170,10 +176,50 @@ public class CTECTwitter
  				mostPopularIndex = index;
  				topWord = tweetedWords.get(mostPopularIndex);
  			}
- 			currentPopularity = 0;
  		}
- 		results += " the most popular word was " + topWord + ", and it occured " + popularCount + " times.";
- 		results += "\nThat means it has a percentage of " + ((double) popularCount)/tweetedWords.size() * 100 + "%";
+ 		results = " the most popular word is: " + topWord + ", and it occured " + popularCount + " times out of " + tweetedWords.size() + ", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size()));
+ 	
+ 		return results;
+ 	}
+ 	
+ 	private String removePunctuation(String currentString)
+ 	{
+ 		String puncuation = ".,'?!:;\"(){}^[]<>-";
+ 		
+ 		String scrubbedString = "";
+ 		for(int i = 0; i < currentString.length(); i++)
+ 		{
+ 			if(puncuation.indexOf(currentString.charAt(i)) == -1)
+ 			{
+ 				scrubbedString += currentString.charAt(i);
+ 			}
+ 		}
+ 		return scrubbedString;
+ 	}
+
+ 	public String searchForTweet()
+ 	{
+ 		String results = "";
+ 		
+ 		Query query = new Query();
+ 		
+ 		query.setCount(1);
+ 		query.setGeoCode(new GeoLocation(40.587521, -111.869178), 10, Query.MILES);
+ 		query.setSince("2017-1-1");
+ 		
+ 		try
+ 		{
+ 			QueryResult result = twitterBot.search(query);
+ 			results += "The most recent tweet within 10 miles of CTEC is: \n";
+ 			for(Status tweet : result.getTweets())
+ 			{
+ 				results += "@" + tweet.getUser().getName() + ": " + tweet.getText() + "\n";
+ 			}
+ 		}
+ 		catch(TwitterException error)
+ 		{
+ 			baseController.handleErrors(error);
+ 		}
  		
  		return results;
  	}
