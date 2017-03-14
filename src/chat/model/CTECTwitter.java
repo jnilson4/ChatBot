@@ -203,14 +203,14 @@ public class CTECTwitter
  		
  		Query query = new Query();
  		
- 		query.setCount(1);
- 		query.setGeoCode(new GeoLocation(40.587521, -111.869178), 10, Query.MILES);
+ 		query.setCount(2);
+ 		query.setGeoCode(new GeoLocation(40.587521, -111.869178), 5, Query.MILES);
  		query.setSince("2017-1-1");
  		
  		try
  		{
  			QueryResult result = twitterBot.search(query);
- 			results += "The most recent tweet within 10 miles of CTEC is: \n";
+ 			results += "The most recent two tweets within 5 miles of CTEC is: \n";
  			for(Status tweet : result.getTweets())
  			{
  				results += "@" + tweet.getUser().getName() + ": " + tweet.getText() + "\n";

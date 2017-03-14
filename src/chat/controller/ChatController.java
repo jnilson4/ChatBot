@@ -153,7 +153,7 @@ public class ChatController
 //		String results = "The top word from user: " + name + " is: ";
 //		results += tweetBot.getMostCommonWord(name);
 		
-		String results = "Searching twitter for the most recent tweet within 10 miles of CTEC...";
+		String results = "Searching twitter for the most recent tweet within 10 miles of CTEC...\n";
 		results += tweetBot.searchForTweet();
 		
 		return results;

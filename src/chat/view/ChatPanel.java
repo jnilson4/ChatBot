@@ -161,7 +161,9 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent clicked)
 			{
 				String username = chatField.getText();
-				chatDisplay.append(baseController.searchTwitter(username));
+				String results = baseController.searchTwitter(username);
+				chatDisplay.setText(results + chatDisplay.getText());
+				chatDisplay.setCaretPosition(0);
 			}
 		});
 		
