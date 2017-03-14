@@ -63,6 +63,7 @@ public class CTECTwitter
 	{
 		gatherTheTweets(username);
 		turnTweetsToWords();
+		removeMentions();
 		removeBoringWords();
 		removeBlankWords();
 		
@@ -113,6 +114,18 @@ public class CTECTwitter
 			}
 		}
 	}
+	
+	private void removeMentions()
+ 	{
+ 		for(int index = 0; index < tweetedWords.size(); index++)
+ 		{
+ 			if(tweetedWords.get(index).substring(0,1).equals("@"))
+ 			{
+ 				tweetedWords.remove(index);
+ 				index--;
+ 			}
+ 		}
+ 	}
 	
 	private void gatherTheTweets(String user)
 	{

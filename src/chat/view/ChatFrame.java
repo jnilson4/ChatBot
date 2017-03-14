@@ -24,7 +24,7 @@ public class ChatFrame extends JFrame
 	{
 		this.setContentPane(basePanel);
 		this.setTitle("Chatbot 2.0");
-		this.setSize(new Dimension(500,325));
+		this.setSize(new Dimension(600,385));
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
