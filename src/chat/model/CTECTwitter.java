@@ -60,14 +60,17 @@ public class CTECTwitter
 	}
 	
 	public String getMostCommonWord(String username)
-	{
+	{	
 		gatherTheTweets(username);
+		
+		String information = "tweet count is: " + allTheTweets.size();
+		
 		turnTweetsToWords();
-		removeMentions();
 		removeBoringWords();
 		removeBlankWords();
+		removeMentions();
 		
-		String information = "The tweetcount is " + allTheTweets.size() + " and " + username + "'s " + calculateTopWord();
+		 information += " and their" + calculateTopWord();
 		
 		return information;
 	}
@@ -134,18 +137,27 @@ public class CTECTwitter
 		
 		int pageCount = 1;
 		
-		Paging statusPage = new Paging(1,20);
+		Paging statusPage = new Paging(1,200);
+		Long maxId = Long.MAX_VALUE;
 		
 		while(pageCount <= 10)
 		{
 			try
 			{
-				allTheTweets.addAll(twitterBot.getUserTimeline(user, statusPage));
+				for(Status currentStatus : twitterBot.getUserTimeline(user, statusPage))
+				{
+					if(currentStatus.getId() < maxId)
+					{
+						allTheTweets.add(currentStatus);
+						maxId = currentStatus.getId();
+					}
+				}
 			}
 			catch (TwitterException twitterError)
 			{
 				baseController.handleErrors(twitterError);
 			}
+			statusPage.setPage(pageCount);
 			pageCount++;
 		}
 	}
@@ -178,7 +190,7 @@ public class CTECTwitter
  			int currentPopularity = 0;
  			for(int searched = index + 1; searched < tweetedWords.size(); searched++)
  			{
- 				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)) && !tweetedWords.get(index).equals(topWord));
+ 				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)) && !tweetedWords.get(index).equals(topWord))
  				{
  					currentPopularity++;
  				}
@@ -190,7 +202,7 @@ public class CTECTwitter
  				topWord = tweetedWords.get(mostPopularIndex);
  			}
  		}
- 		results = " the most popular word is: " + topWord + ", and it occured " + popularCount + " times out of " + tweetedWords.size() + ", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size()));
+ 		results = " most popular word is: " + topWord + ", and it occured " + popularCount + " times out of " + tweetedWords.size() + ", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size()) + "\n");
  	
  		return results;
  	}

@@ -158,7 +158,7 @@ public class ChatController
 	
 	public String searchTwitterUser(String name)
 	{
-		String results = "The top word from user: " + name + " is: ";
+		String results = "The user " + name + "'s ";
 		results += tweetBot.getMostCommonWord(name);
 		
 		return results;
