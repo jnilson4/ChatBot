@@ -1,6 +1,7 @@
 package chat.controller;
 
-import chat.model.Chatbot;
+import javax.swing.JOptionPane;
+import chat.model.*;
 import chat.view.ChatViewer;
 import chat.view.ChatFrame;						
 
@@ -9,23 +10,19 @@ public class ChatController
 	private Chatbot stupidBot;
 	private ChatViewer chatView;
 	private ChatFrame baseFrame;
+	private CTECTwitter tweetBot;
 	
 	public ChatController()
 	{
 		stupidBot = new Chatbot("Boaty McBoatFace");
-		chatView = new ChatViewer();
+		tweetBot = new CTECTwitter(this);
 		baseFrame = new ChatFrame(this);
+		chatView = new ChatViewer();
 	}
 	
 	public void start()
 	{
-		String response = chatView.collectResponse("What do you want to talk about today???");
-		
-		while(stupidBot.lengthChecker(response))
-		{
-			chatView.displayMessage(useChatbotCheckers(response));
-			response = chatView.collectResponse("Oh, you are interested in " + response);
-		}
+		chatView.displayMessage("Welcome to Chatbot!");
 	}
 	
 	public String useChatbotCheckers(String input)
@@ -36,17 +33,42 @@ public class ChatController
 		{
 			if(stupidBot.contentChecker(input))
 			{
-				answer += "\nYou know my special secret\n";
+				answer += "You know my special secret";
 			}
 			
 			if(stupidBot.memeChecker(input))
 			{
-				answer += "\nI can has memes?\n";
+				answer += "I can has memes?";
 			}
 			
-			if(stupidBot.lengthChecker(answer))
+//			if(stupidBot.lengthChecker(input))
+//			{
+//				answer += "Sorry, I don't know about " + input;
+//			}
+			
+			if(stupidBot.politicalTopicChecker(input))
 			{
-				answer += "Sorry, I don't know about " + input;
+				answer += "You like politics huh?";
+			}
+			
+			if(stupidBot.inputHTMLChecker(input))
+			{
+				answer += "I don't know how to talk about HTML.";
+			}
+			
+//			if(stupidBot.twitterChecker(input))
+//			{
+//				answer += "\nTWITTER, CHEEP CHEEP\n";
+//			}
+			
+			if(stupidBot.keyboardMashChecker(input))
+			{
+				answer += "MASH MASH MASH";
+			}
+			
+			if(stupidBot.helloChecker(input))
+			{
+				answer+= "Hi!! How are you? ";
 			}
 			
 			int canBeRandom = (int) (Math.random() * 7);
@@ -54,23 +76,14 @@ public class ChatController
 			{
 				answer += randomTopicGenerator();
 			}
+			
+//			answer += "Wow";
 		}
 		else 
 		{
-			chatView.displayMessage("Thanks you for chatting with me :D");
 			System.exit(0);
 		}
 		return answer;
-	}
-	
-	public Chatbot getChatbot()
-	{
-		return stupidBot;
-	}
-	
-	public ChatFrame getBaseFrame()
-	{
-		return baseFrame;
 	}
 	
 	public String randomTopicGenerator()
@@ -101,11 +114,53 @@ public class ChatController
 		case 6:
 			randomTopic = "Time to code!";
 			break;
-		case 7: 
-			randomTopic = "Tennis is awesome!";
+		default: 
+			randomTopic = "This can't be happening!";
 			break;
 		}
 		
 		return randomTopic;
+	}
+	
+	public Chatbot getChatbot()
+	{
+		return stupidBot;
+	}
+	
+	public ChatFrame getBaseFrame()
+	{
+		return baseFrame;
+	}
+	
+	public void handleErrors(Exception currentException)
+	{
+		chatView.displayMessage("An error has occured. Details provided next.");
+		chatView.displayMessage(currentException.getMessage());
+	}
+	
+	public ChatViewer getPopup()
+	{
+		return chatView;
+	}
+	
+	public void useTwitter(String text)
+	{
+		tweetBot.sendTweet(text);
+	}
+	
+	public String searchTwitter(String name)
+	{	
+		String results = "Searching twitter for the most recent tweet within 10 miles of CTEC...\n";
+		results += tweetBot.searchForTweet();
+		
+		return results;
+	}
+	
+	public String searchTwitterUser(String name)
+	{
+		String results = "The user " + name + "'s ";
+		results += tweetBot.getMostCommonWord(name);
+		
+		return results;
 	}
 }

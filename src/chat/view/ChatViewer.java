@@ -11,14 +11,14 @@ public class ChatViewer
 	public ChatViewer()
 	{
 		windowMessage = "This message brought to you by the chatbot! :D";
-		chatIcon = new ImageIcon(getClass().getResource("images/chatbot.jpg"));
+		chatIcon = new ImageIcon(getClass().getResource("images/chatbot.png"));
 	}
 	
 	public String collectResponse(String question)
 	{
 		String response = "";
 		
-		response = JOptionPane.showInputDialog(null, question, windowMessage, JOptionPane.INFORMATION_MESSAGE, chatIcon, null, "Type here please!").toString();
+		response = JOptionPane.showInputDialog(null, question, windowMessage, JOptionPane.INFORMATION_MESSAGE, chatIcon, null, "Type here please!").toString() + "";
 		
 		return response;
 	}

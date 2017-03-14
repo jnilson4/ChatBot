@@ -121,6 +121,18 @@ public class Chatbot
 		return hasContent;
 	}
 
+	public boolean helloChecker(String currentInput)
+	{
+		boolean hasHello = false;
+		
+		if(currentInput.equalsIgnoreCase("Hello") || currentInput.equalsIgnoreCase("Hi") || currentInput.equalsIgnoreCase("Hey"))
+		{
+			hasHello = true;
+		}
+		
+		return hasHello;
+	}
+	
 	/**
 	 * * Checks if supplied String matches ANY of the topics in the
 	 * politicalTopicsList. Returns true if it does find a match and false if it
