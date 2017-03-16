@@ -18,10 +18,10 @@ public class ChatPanel extends JPanel
 	private JTextArea chatDisplay;
 	private JTextField chatField;
 	private JScrollPane chatPane;
-	private JButton chatButton, searchTwitter, sendTweetButton, saveButton, loadButton, searchTwitterUser;
+	private JButton chatButton, searchTwitter, sendTweetButton, saveButton, loadButton, searchTwitterUser, clearText;
 	private JLabel chatLabel;
 	private Color lightBlue;
-	private ImageIcon chatBot, save, twitter, upload;
+	private ImageIcon chatBot, save, twitter, upload, clear;
 	
 	public ChatPanel(ChatController baseController)
 	{
@@ -32,6 +32,7 @@ public class ChatPanel extends JPanel
 		this.save = new ImageIcon(getClass().getResource("/chat/view/images/save.png"));
 		this.upload = new ImageIcon(getClass().getResource("/chat/view/images/upload.png"));
 		this.twitter = new ImageIcon(getClass().getResource("/chat/view/images/twitterlogo.png"));
+		this.clear = new ImageIcon(getClass().getResource("/chat/view/images/clear.png"));
 		
 		chatDisplay = new JTextArea(5, 25);
 		chatField = new JTextField(25);
@@ -43,6 +44,7 @@ public class ChatPanel extends JPanel
 		saveButton = new JButton("Save", save);
 		loadButton = new JButton("Load", upload);
 		searchTwitterUser = new JButton("Search User Tweets", twitter);
+		clearText = new JButton("Clear Text", clear);
 		
 		lightBlue = Color.decode("#FA4B4B");
 		
@@ -72,6 +74,11 @@ public class ChatPanel extends JPanel
 	private void setupPanel()
 	{
 		baseLayout = new SpringLayout();
+		baseLayout.putConstraint(SpringLayout.NORTH, clearText, 15, SpringLayout.SOUTH, chatButton);
+		baseLayout.putConstraint(SpringLayout.WEST, clearText, 0, SpringLayout.WEST, chatButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, clearText, 0, SpringLayout.SOUTH, searchTwitterUser);
+		baseLayout.putConstraint(SpringLayout.EAST, clearText, 0, SpringLayout.EAST, chatButton);
+		baseLayout.putConstraint(SpringLayout.EAST, searchTwitterUser, 0, SpringLayout.EAST, loadButton);
 		this.setLayout(baseLayout);
 		this.setBackground(lightBlue);
 		this.setPreferredSize(new Dimension(600, 385));
@@ -84,6 +91,7 @@ public class ChatPanel extends JPanel
 		this.add(loadButton);
 		this.add(chatPane);
 		this.add(searchTwitterUser);
+		this.add(clearText);
 	}
 	
 	private void setupLayout()
@@ -115,7 +123,6 @@ public class ChatPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, searchTwitter, 15, SpringLayout.SOUTH, sendTweetButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, searchTwitterUser, 15, SpringLayout.SOUTH, searchTwitter);
 		baseLayout.putConstraint(SpringLayout.WEST, searchTwitterUser, 0, SpringLayout.WEST, sendTweetButton);
-		baseLayout.putConstraint(SpringLayout.EAST, searchTwitterUser, 0, SpringLayout.EAST, chatButton);
 		baseLayout.putConstraint(SpringLayout.WEST, saveButton, 15, SpringLayout.EAST, sendTweetButton);
 		baseLayout.putConstraint(SpringLayout.EAST, sendTweetButton, 185, SpringLayout.WEST, chatField);
 		baseLayout.putConstraint(SpringLayout.EAST, searchTwitter, 185, SpringLayout.WEST, chatField);
@@ -191,6 +198,14 @@ public class ChatPanel extends JPanel
 				String results = baseController.searchTwitterUser(username);
 				chatDisplay.setText(results + chatDisplay.getText());
 				chatDisplay.setCaretPosition(0);
+			}
+		});
+		
+		clearText.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent clicked)
+			{
+				chatDisplay.setText("");
 			}
 		});
 	}
